@@ -10,33 +10,36 @@ def help_commands():
     )
     embed.add_field(
         name='Quotes',
-        value='quote -> Returns a random quote',
+        value='!quote -> Returns a random quote',
         inline=False
     )
     embed.add_field(
         name='Exchange USD value',
-        value='usd "currency_code" -> Returns the exchange value. (ex.: usd cad)',
+        value='!usd "currency_code" -> Returns the exchange value. (ex.: usd cad)',
         inline=False
     )
     embed.add_field(
         name='Weather',
-        value='w "city" "country_code" -> Returns the wheater. (ex.: w ottawa ca)',
+        value='!w "city" "country_code" -> Returns the wheater. (ex.: w ottawa ca)',
         inline=False
     )
     embed.add_field(
         name='Ottawa OCTranspo',
-        value='bus "stop#" -> Returns the next trips for the stop. (ex.:bus 1222)',
+        value='!bus "stop#" -> Returns the next trips for the stop. (ex.:bus 1222)',
         inline=False
     )
     return embed
 
 async def send_message(message, is_private):
     try:
-        if message.content == 'h':
+        if message.content == '!h':
             await message.channel.send(embed=help_commands())
-        elif message.content == 'delete':
+        elif message.content == '!delete':
             await message.channel.purge()
-        elif message.content.split(' ')[0] == 'bus':
+        elif message.content.split(' ')[0] == '!bus':
+            response = responses.handle_response(message.content)
+            await message.channel.send(embed=response)
+        elif message.content.split(' ')[0] == '!w':
             response = responses.handle_response(message.content)
             await message.channel.send(embed=response)
         else:
