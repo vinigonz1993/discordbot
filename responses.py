@@ -94,7 +94,8 @@ def handle_response(message):
 
     if message.startswith('!bus'):
         try:
-            stopNo = message.split(' ')[1]
+            list_string = message.split(' ')
+            stopNo = list_string[1]
             oct = OCTranspo()
             request = oct.run(stopNo)
 
@@ -103,23 +104,37 @@ def handle_response(message):
                 color=0x109319,
                 description=f"Stop # {request['GetRouteSummaryForStopResult']['StopNo']}"
             )
-            for route in request['GetRouteSummaryForStopResult']['Routes']['Route']:
-                embed.add_field(
-                    name=f"{route['RouteNo']} - {route['RouteHeading']}",
-                    value='',
-                    inline=False
-                )
-                for trip in route['Trips']:
+
+            if len(list_string) == 3:
+                routeNo = list_string[2]
+                for route in request['GetRouteSummaryForStopResult']['Routes']['Route']:
+                    if int(route['RouteNo']) == int(routeNo):
+                        trips = route['Trips']
+                        value=''
+                        for trip in trips:
+                            value += f"\n{trip['AdjustedScheduleTime']}min"
+                        embed.add_field(
+                            name=f"{route['RouteNo']} - {route['RouteHeading']}",
+                            value=value,
+                            inline=False
+                        )
+            else:
+                for route in request['GetRouteSummaryForStopResult']['Routes']['Route']:
                     embed.add_field(
-                        name='',
-                        value=f"{trip['AdjustedScheduleTime']}min",
+                        name=f"{route['RouteNo']} - {route['RouteHeading']}",
+                        value='',
                         inline=False
                     )
 
             return embed
-        except:
-            return "Sorry I did'nt find the stop"
+        except Exception as erro:
+            print(erro)
+            return discord.Embed(
+                title="Error",
+                color=0xED4245,
+                description='''Sorry, the service unavailable right now'''
+            )
 
-    if message:
+    if message.startswith('!'):
         request = OpenAI(message).run()
         return request
