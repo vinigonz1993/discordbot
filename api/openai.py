@@ -1,10 +1,16 @@
 from config import CONFIG
 import openai
+import random
 
 class OpenAI():
     key = CONFIG['OPEN_AI']
     model_engine = "text-davinci-003"
     MAX_SIZE_STRING = 300
+    errors_messages = [
+        'The question/answer is too big, try another one',
+        'Try a shorter question please',
+        'Your text is too big'
+    ]
 
     def __init__(self, prompt):
         openai.api_key = self.key
@@ -21,7 +27,7 @@ class OpenAI():
 
     def run(self):
         if self.validate_prompt() is False:
-            return "Sorry, try a shorter question"
+            return random.choice(self.errors_messages)
 
         completion = openai.Completion.create(
             engine=self.model_engine,
