@@ -132,7 +132,7 @@ def handle_response(message):
             return discord.Embed(
                 title="Error",
                 color=0xED4245,
-                description='''Sorry, the service unavailable right now'''
+                description='''Sorry, the service unavailable right now, or the information is invalid'''
             )
 
     if message.startswith('!'):
