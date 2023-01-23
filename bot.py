@@ -15,22 +15,22 @@ def help_commands():
     )
     embed.add_field(
         name='Exchange USD value',
-        value='!usd "currency_code" -> Returns the exchange value. (ex.: usd cad)',
+        value='!usd "currency_code" -> Returns the exchange value. (ex.: !usd cad)',
         inline=False
     )
     embed.add_field(
         name='Weather',
-        value='!w "city" "country_code" -> Returns the wheater. (ex.: w ottawa ca)',
+        value='!w "city" "country_code" -> Returns the wheater. (ex.: !w ottawa ca)',
         inline=False
     )
     embed.add_field(
         name='Ottawa OCTranspo',
-        value='!bus "stop#" -> Returns the next trips for the stop. (ex.:bus 1222)',
+        value='!bus "stop#" "route#" -> Returns the next trips for the stop. (ex.: !bus 1222 57)',
         inline=False
     )
     embed.add_field(
         name='OpenAI chat',
-        value='There is no additional command to this, just ask your question!',
+        value='! -> Chat',
         inline=False
     )
     return embed
@@ -38,7 +38,7 @@ def help_commands():
 async def send_message(message, is_private):
     try:
         if message.content == '!h':
-            await message.channel.send(embed=help_commands())
+            await message.reply(embed=help_commands())
         elif message.content == '!delete':
             await message.channel.purge()
         elif message.content.split(' ')[0] == '!bus':
