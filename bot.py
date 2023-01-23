@@ -28,6 +28,11 @@ def help_commands():
         value='!bus "stop#" -> Returns the next trips for the stop. (ex.:bus 1222)',
         inline=False
     )
+    embed.add_field(
+        name='OpenAI chat',
+        value='There is no additional command to this, just ask your question!',
+        inline=False
+    )
     return embed
 
 async def send_message(message, is_private):

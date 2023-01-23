@@ -4,17 +4,19 @@ from api.weather import WeatherApi
 from api.exchange import Exchange
 from api.quotes import Quotes
 from api.octranspo import OCTranspo
+from api.openai import OpenAI
+
 
 def handle_response(message):
-    p_message = message.lower()
+    message = message.lower()
 
-    if p_message.startswith('!quote'):
+    if message.startswith('!quote'):
         quotes = Quotes()
         return quotes.run()
 
-    if p_message.startswith('!usd'):
+    if message.startswith('!usd'):
 
-        find_rate = p_message.split(' ')[1].upper()
+        find_rate = message.split(' ')[1].upper()
 
         exchange = Exchange()
         request = exchange.run()
@@ -28,9 +30,9 @@ def handle_response(message):
 
         return response
 
-    if p_message.startswith('!w'):
+    if message.startswith('!w'):
         try:
-            params =  p_message.split(' ')
+            params =  message.split(' ')
 
             location = params[1]
             country = params[2]
@@ -90,9 +92,9 @@ def handle_response(message):
         except:
             return "Sorry I couldn't find the location"
 
-    if p_message.startswith('!bus'):
+    if message.startswith('!bus'):
         try:
-            stopNo = p_message.split(' ')[1]
+            stopNo = message.split(' ')[1]
             oct = OCTranspo()
             request = oct.run(stopNo)
 
@@ -117,3 +119,7 @@ def handle_response(message):
             return embed
         except:
             return "Sorry I did'nt find the stop"
+
+    if message:
+        request = OpenAI(message).run()
+        return request
