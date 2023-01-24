@@ -136,5 +136,7 @@ def handle_response(message):
             )
 
     if message.startswith('!'):
+        if message.strip() == '!' or len(message.split(' ')) < 2:
+            return 'Are you trying to ask something? Try again'
         request = OpenAI(message).run()
         return request
