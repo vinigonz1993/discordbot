@@ -85,7 +85,7 @@ def handle_response(message):
             )
             embed.add_field(
                 name='',
-                value=f"Feels link {calculate_celcius(request['main']['feels_like'])}",
+                value=f"Feels like {calculate_celcius(request['main']['feels_like'])}",
                 inline=False
             )
             return embed
@@ -134,6 +134,13 @@ def handle_response(message):
                 color=0xED4245,
                 description='''Sorry, the service unavailable right now, or the information is invalid'''
             )
+
+    if message.startswith('!img'):
+        if message.strip() == '!' or len(message.split(' ')) < 2:
+            return 'Are you trying to ask something? Try again'
+        message = message.replace('!img', '')
+        request = OpenAI(message).run_image()
+        return request
 
     if message.startswith('!'):
         if message.strip() == '!' or len(message.split(' ')) < 2:

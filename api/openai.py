@@ -25,19 +25,37 @@ class OpenAI():
 
         return True
 
+    def run_image(self):
+        if self.validate_prompt() is False:
+            return random.choice(self.errors_messages)
+
+        try:
+            image = openai.Image.create(
+                prompt=self.prompt,
+                n=1,
+                size="256x256"
+            )
+            return image['data'][0]['url']
+        except Exception as error:
+            print(error)
+            return error
+
     def run(self):
         if self.validate_prompt() is False:
             return random.choice(self.errors_messages)
 
-        completion = openai.Completion.create(
-            engine=self.model_engine,
-            prompt=self.prompt,
-            max_tokens=100,
-            n=1,
-            stop=None,
-            temperature=0.5,
-        )
+        try:
+            completion = openai.Completion.create(
+                engine=self.model_engine,
+                prompt=self.prompt,
+                max_tokens=100,
+                n=1,
+                stop=None,
+                temperature=0.5,
+            )
 
-        response = completion.choices[0].text
+            response = completion.choices[0].text
 
-        return response
+            return response
+        except Exception as error:
+            return error

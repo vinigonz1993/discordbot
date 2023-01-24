@@ -29,6 +29,11 @@ def help_commands():
         inline=False
     )
     embed.add_field(
+        name='OpenAI image',
+        value='!img "text" -> Creates an image based on the text',
+        inline=False
+    )
+    embed.add_field(
         name='OpenAI chat',
         value='! -> Chat',
         inline=False
