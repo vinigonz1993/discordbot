@@ -31,5 +31,5 @@ def hello():
     return 'This is a python app!'
 
 if __name__ == '__main__':
-    run_thread(run())
+    # run_thread(run())
     bot.run_bot()
