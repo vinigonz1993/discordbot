@@ -49,14 +49,10 @@ def webhook():
         x_hub_signature = request.headers.get('X-Hub-Signature')
         if not is_valid_signature(x_hub_signature, request.data, CONFIG['GITHUB_WEBHOOK_SECRET']):
             return 'Error'
-        print('1')
         # repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
-        repo = git.Repo('/home/vinigonz1993')
-        print('2')
+        repo = git.Repo('/var/www/sites/vinigonz1993')
         origin = repo.remote.origin
-        print('3')
         origin.pull()
-        print('4')
         return 'Updated!'
     except Exception as error:
         return str(error)
