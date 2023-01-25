@@ -34,14 +34,13 @@ def hello():
 
 @app.route('/server_update', methods=['POST'])
 def webhook():
-    if request.method == 'POST':
-        try:
-            repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
-            origin = repo.remote.origin
-            origin.pull()
-            return 'Updated!'
-        except Exception as error:
-            return error
+    try:
+        repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
+        origin = repo.remote.origin
+        origin.pull()
+        return 'Updated!'
+    except Exception as error:
+        return str(error)
 
 if __name__ == '__main__':
     run_thread(run)
