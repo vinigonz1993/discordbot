@@ -10,7 +10,7 @@ discord = DiscordInteractions(app)
 
 app.config["DISCORD_CLIENT_ID"] = CONFIG["DISCORD_APP_ID"]
 app.config["DISCORD_PUBLIC_KEY"] = CONFIG["DISCORD_PUBLIC_KEY"]
-app.config["DISCORD_CLIENT_SECRET"] = CONFIG["DISCORD_TOKEN"]
+app.config["DISCORD_CLIENT_SECRET"] = CONFIG["DISCORD_CLIENT_SECRET"]
 
 def run_chain():
     discord.set_route('/interactions')
