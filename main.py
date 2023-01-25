@@ -17,7 +17,9 @@ discord.set_route('/interactions')
 discord.update_commands(guild_id=CONFIG['SERVER_GUIlD'])
 
 def run_thread(func):
-    thread = Thread(target=bot.run_bot())
+    thread = Thread(
+        target=func
+    )
     print('Start Separate Thread From Bot')
     thread.start()
 
@@ -31,5 +33,5 @@ def hello():
     return 'This is a python app!'
 
 if __name__ == '__main__':
-    # run_thread(run())
+    run_thread(run)
     bot.run_bot()
