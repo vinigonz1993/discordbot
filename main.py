@@ -41,7 +41,7 @@ def is_valid_signature(x_hub_signature, data, private_key):
 
 @app.route('/')
 def hello():
-    return 'This is a python app! Test it if you can'
+    return 'This is a python app, a bot!'
 
 @app.route('/server_update', methods=['POST'])
 def webhook():
