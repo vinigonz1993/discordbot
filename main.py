@@ -1,3 +1,4 @@
+from threading import Thread
 import bot
 from config import CONFIG
 
@@ -12,11 +13,23 @@ app.config["DISCORD_CLIENT_ID"] = CONFIG["DISCORD_APP_ID"]
 app.config["DISCORD_PUBLIC_KEY"] = CONFIG["DISCORD_PUBLIC_KEY"]
 app.config["DISCORD_CLIENT_SECRET"] = CONFIG["DISCORD_CLIENT_SECRET"]
 
-def run_chain():
-    discord.set_route('/interactions')
-    discord.update_commands(guild_id=CONFIG['SERVER_GUIlD'])
-    bot.run_bot()
+discord.set_route('/interactions')
+discord.update_commands(guild_id=CONFIG['SERVER_GUIlD'])
+
+def run_thread(func):
+    thread = Thread(target=bot.run_bot())
+    print('Start Separate Thread From Bot')
+    thread.start()
+
+def run():
+    app.run(
+        host='0.0.0.0', port=8080
+    )
+
+@app.route('/')
+def hello():
+    return 'This is a python app!'
 
 if __name__ == '__main__':
-    run_chain()
-    app.run()
+    run_thread(run())
+    bot.run_bot()
