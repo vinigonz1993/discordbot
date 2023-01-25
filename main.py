@@ -36,7 +36,7 @@ def hello():
 def webhook():
     if request.method == 'POST':
         try:
-            repo = git.Repo('https://github.com/vinigonz1993/discordbot')
+            repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
             origin = repo.remote.origin
             origin.pull()
             return 'Updated!'
