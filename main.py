@@ -35,9 +35,13 @@ def hello():
 @app.route('/server_update', methods=['POST'])
 def webhook():
     try:
+        print('1')
         repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
+        print('2')
         origin = repo.remote.origin
+        print('3')
         origin.pull()
+        print('4')
         return 'Updated!'
     except Exception as error:
         return str(error)
