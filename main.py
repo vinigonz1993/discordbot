@@ -49,7 +49,7 @@ def webhook():
         x_hub_signature = request.headers.get('X-Hub-Signature')
         if not is_valid_signature(x_hub_signature, request.data, CONFIG['GITHUB_WEBHOOK_SECRET']):
             return 'Error'
-        repo = git.Repo('./')
+        repo = git.Repo('/var/www/sites/vinigonz1993/')
         origin = repo.remotes.origin
         repo.create_head(
             'master',
