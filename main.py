@@ -8,7 +8,7 @@ from config import CONFIG
 from flask import Flask, request
 from flask_discord_interactions import DiscordInteractions
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="./frontend/build", static_url_path="/")
 discord = DiscordInteractions(app)
 
 app.config["DISCORD_CLIENT_ID"] = CONFIG["DISCORD_APP_ID"]
@@ -41,7 +41,7 @@ def is_valid_signature(x_hub_signature, data, private_key):
 
 @app.route('/')
 def hello():
-    return 'I am a python applications!'
+    return app.send_static_file('index.html')
 
 @app.route('/server_update', methods=['POST'])
 def webhook():
@@ -50,7 +50,7 @@ def webhook():
         if not is_valid_signature(x_hub_signature, request.data, CONFIG['GITHUB_WEBHOOK_SECRET']):
             return 'Error'
         # repo = git.Repo('https://github.com/vinigonz1993/discordbot.git')
-        repo = git.Repo('/var/www/sites/vinigonz1993')
+        repo = git.Repo('./')
         origin = repo.remote.origin
         origin.pull()
         return 'Updated!'
