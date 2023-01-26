@@ -7,6 +7,6 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v2
-            - uses: ../../frontend/.github/workflow/workflow
+            - uses: ././frontend/.github/workflow/workflow
             - name: Build React App
               run: yarn install && yarn run build
