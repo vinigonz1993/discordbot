@@ -46,10 +46,10 @@ def hello():
 @app.route('/server_update', methods=['POST'])
 def webhook():
     try:
-        # x_hub_signature = request.headers.get('X-Hub-Signature')
-        # if not is_valid_signature(x_hub_signature, request.data, CONFIG['GITHUB_WEBHOOK_SECRET']):
-        #     return 'Error'
-        repo = git.Repo('/var/www/sites/vinigonz1993')
+        x_hub_signature = request.headers.get('X-Hub-Signature')
+        if not is_valid_signature(x_hub_signature, request.data, CONFIG['GITHUB_WEBHOOK_SECRET']):
+            return 'Error'
+        repo = git.Repo('./')
         origin = repo.remotes.origin
         origin.pull()
         return 'Updated!'
