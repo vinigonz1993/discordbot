@@ -1,0 +1,12 @@
+name: test
+
+on: [pull_request]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - redirects: ../../frontend
+            - name: Build React App
+              run: yarn install && yarn run build
