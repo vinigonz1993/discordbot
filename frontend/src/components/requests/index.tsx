@@ -1,9 +1,11 @@
 import axios from 'axios';
 
+const endpoint = process.env.REACT_API
+
 export default {
     oct: {
         get: () => axios.get(
-            'https://vinigonz1993.pythonanywhere.com//oct',
+            `${endpoint}/oct`,
             {
                 method: 'GET',
                 params: {
