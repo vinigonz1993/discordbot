@@ -1,17 +1,18 @@
 import axios from 'axios';
 
-const baseURLOCTranspo = `${process.env.REACT_API}oct`;
+const apiOCTranspo = axios.create({
+    baseURL: `${process.env.REACT_API}`,
+});
 
 export default {
     oct: {
-        get: () => axios.get(
-            baseURLOCTranspo,
+        get: () => apiOCTranspo.get(
+            '/oct',
             {
-                method: 'GET',
                 params: {
                     stopNo: 1222,
-                    routeNo: 57
-                },
+                    routeNo: 57,
+                }
             },
         ),
     },
