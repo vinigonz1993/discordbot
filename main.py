@@ -5,10 +5,13 @@ import hashlib
 from threading import Thread
 from config import CONFIG
 
-from flask import Flask, request
+from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_discord_interactions import DiscordInteractions
+from api.octranspo import OCTranspo
 
 app = Flask(__name__, static_folder="./frontend/build", static_url_path="/")
+CORS(app)
 discord = DiscordInteractions(app)
 
 app.config["DISCORD_CLIENT_ID"] = CONFIG["DISCORD_APP_ID"]
@@ -27,7 +30,7 @@ def run_thread(func):
 
 def run():
     app.run(
-        host='0.0.0.0', port=8080
+        host='0.0.0.0', port=5000
     )
 
 def is_valid_signature(x_hub_signature, data, private_key):
@@ -55,6 +58,16 @@ def webhook():
         return 'Updated!'
     except Exception as error:
         return str(error)
+
+@app.route('/oct', methods=['GET'])
+def get_route():
+    stopNo = request.args.get('stopNo')
+
+    oct = OCTranspo()
+    response = oct.run(stopNo)
+
+    return jsonify(response)
+
 
 if __name__ == '__main__':
     run_thread(run)
