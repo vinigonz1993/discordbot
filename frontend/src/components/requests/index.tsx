@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-const endpoint = process.env.REACT_API
+const baseURLOCTranspo = `${process.env.REACT_API}/oct`;
 
 export default {
     oct: {
         get: () => axios.get(
-            `${endpoint}oct`,
+            baseURLOCTranspo,
             {
                 method: 'GET',
                 params: {
