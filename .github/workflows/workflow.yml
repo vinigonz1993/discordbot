@@ -6,5 +6,6 @@ jobs:
     build:
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@v3
-            - uses: ././frontend/.github/workflow
+            - uses: actions/checkout@v2
+            - name: Biuld ReactJS
+              uses: ././frontend/.github/workflow
