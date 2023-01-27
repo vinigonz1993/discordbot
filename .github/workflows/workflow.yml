@@ -5,7 +5,10 @@ on: [pull_request]
 jobs:
     build:
         runs-on: ubuntu-latest
+        defaults:
+          run:
+            working-directory: ./frontend
         steps:
             - uses: actions/checkout@v2
-            - name: Biuld ReactJS
-              uses: ././frontend/.github/workflow
+            - name: Build React App
+              run: yarn install && yarn run build
