@@ -3,7 +3,7 @@ import axios from 'axios';
 export default {
     oct: {
         get: () => axios.get(
-            'https://127.0.0.1:5000/oct',
+            'https://vinigonz1993.pythonanywhere.com//oct',
             {
                 method: 'GET',
                 params: {
