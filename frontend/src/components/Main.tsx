@@ -9,7 +9,7 @@ const Main = () => {
             <h6>ToolBoxAPIs</h6>
             <hr />
             <Row>
-                <Col xl={6} lg={6} md={6} sm={12}>
+                <Col xl={4} lg={6} md={6} sm={12}>
                     <Section>
                         OCTranstpo
                         <hr/>
