@@ -1,19 +1,20 @@
 import axios from 'axios';
 
 const apiOCTranspo = axios.create({
-    baseURL: `${process.env.REACT_API}`,
+    baseURL: `${process.env.REACT_APP_API}`,
 });
 
-export default {
+export interface ParamsOCT {
+    stopNo: string,
+}
+
+const Request = {
     oct: {
-        get: () => apiOCTranspo.get(
-            '/oct',
-            {
-                params: {
-                    stopNo: 1222,
-                    routeNo: 57,
-                }
-            },
+        get: (params: ParamsOCT) => apiOCTranspo.get(
+            'oct',
+            { params },
         ),
     },
 };
+
+export default Request;
