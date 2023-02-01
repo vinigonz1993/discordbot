@@ -4,4 +4,7 @@ export const COLORS = {
     dark: '#2f3e46',
     border: '#354f52',
     light: '#cad2c5',
-}
+    text: {
+        menu: '#ffffff',
+    },
+};

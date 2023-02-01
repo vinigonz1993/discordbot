@@ -6,6 +6,7 @@ import Request, { ParamsOCT } from '../requests';
 import { COLORS } from '../common/Colors';
 import Input from '../common/Input';
 import Loader from '../common/Loader';
+import Title from '../common/Title';
 
 interface TripProps {
     time: string,
@@ -14,7 +15,7 @@ interface TripProps {
 const Trip = styled.div<TripProps>`
     width: 100% !important;
     padding: 0.5em;
-    font-size: 0.75em;
+    font-size: 1em;
     ${(props) => {
         if (Number(props.time) < 10) {
             return `
@@ -51,15 +52,16 @@ const OCT = () => {
 
     return (
         <>
+            <Title title="OCTranspo" />
             <Row>
-                <Col>
+                <Col xl={8} lg={8} md={6} sm={12}>
                     <Input
                         type="text"
                         onChange={(e) => setStop(e.target.value)}
                         maxLength={4}
                     />
                 </Col>
-                <Col>
+                <Col xl={4} lg={4} md={6} sm={12}>
                     <BtnPrimary
                         onClick={() => handleClick()}
                     >
@@ -82,11 +84,14 @@ const OCT = () => {
                 <Col xl={6} lg={6} md={6} sm={6} xs={6}>
                     {trips.length > 0 &&
                         trips.map((trip) => (
-                            <Trip
-                                time={trip['AdjustedScheduleTime']}
-                            >
-                                {trip['AdjustedScheduleTime']}min
-                            </Trip>
+                            <>
+                                <Trip
+                                    time={trip['AdjustedScheduleTime']}
+                                >
+                                    {trip['AdjustedScheduleTime']}min
+                                </Trip>
+                                <hr/>
+                            </>
                         ))
                     }
                 </Col>

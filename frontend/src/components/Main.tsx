@@ -2,17 +2,13 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import styled from "styled-components";
 import Section from "./common/Section";
+import Title from "./common/Title";
 import OCT from "./OCT";
-
-const Container = styled.div`
-    margin-left: 250px;
-`;
 
 const Main = () => {
     return (
-        <Container>
-            <h6>ToolBoxAPIs</h6>
-            <hr />
+        <>
+            <Title title="ToolBoxAPIs"/>
             <Row>
                 <Col xl={6} lg={12} md={12} sm={12}>
                     <Section>
@@ -43,7 +39,7 @@ const Main = () => {
                     </Section>
                 </Col>
             </Row>
-        </Container>
+        </>
     );
 };
 
