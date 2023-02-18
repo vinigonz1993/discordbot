@@ -5,7 +5,7 @@ import random
 class OpenAI():
     key = CONFIG['OPEN_AI']
     model_engine = "text-davinci-003"
-    MAX_SIZE_STRING = 400
+    MAX_SIZE_STRING = 800
     errors_messages = [
         'The question/answer is too big, try another one',
         'Try a shorter question please',
@@ -33,7 +33,7 @@ class OpenAI():
             image = openai.Image.create(
                 prompt=self.prompt,
                 n=1,
-                size="256x256"
+                size="512x512"
             )
             return image['data'][0]['url']
         except Exception as error:
@@ -48,10 +48,10 @@ class OpenAI():
             completion = openai.Completion.create(
                 engine=self.model_engine,
                 prompt=self.prompt,
-                max_tokens=100,
+                max_tokens=500,
                 n=1,
                 stop=None,
-                temperature=0.5,
+                temperature=0.3,
             )
 
             response = completion.choices[0].text
