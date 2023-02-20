@@ -33,7 +33,7 @@ class OpenAI():
             image = openai.Image.create(
                 prompt=self.prompt,
                 n=1,
-                size="512x512"
+                size="1024x1024"
             )
             return image['data'][0]['url']
         except Exception as error:
