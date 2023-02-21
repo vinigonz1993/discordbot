@@ -68,7 +68,7 @@ def get_route():
     return jsonify(response)
 
 @app.route('/backend/gpt', methods=['POST'])
-def get_route():
+def get_gpt():
     data = request.form.get('data')
 
     request = OpenAI(data).run()
