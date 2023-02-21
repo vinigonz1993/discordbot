@@ -71,7 +71,7 @@ def get_route():
 def get_gpt():
     data = request.form.get('data')
 
-    response = OpenAI(data).run()
+    response = OpenAI(prompt=data).run()
 
     return jsonify(response)
 
