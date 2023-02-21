@@ -9,6 +9,7 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_discord_interactions import DiscordInteractions
 from api.octranspo import OCTranspo
+from api.openai import OpenAI
 
 app = Flask(__name__, static_folder="./frontend/build", static_url_path="/")
 CORS(app)
@@ -66,6 +67,13 @@ def get_route():
 
     return jsonify(response)
 
+@app.route('/backend/gpt', methods=['POST'])
+def get_route():
+    data = request.form.get('data')
+
+    request = OpenAI(data).run()
+
+    return jsonify(request)
 
 if __name__ == '__main__':
     run_thread(run)
