@@ -5,7 +5,7 @@ import hashlib
 from threading import Thread
 from config import CONFIG
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, json
 from flask_cors import CORS
 from flask_discord_interactions import DiscordInteractions
 from api.octranspo import OCTranspo
@@ -69,11 +69,17 @@ def get_route():
 
 @app.route('/backend/gpt', methods=['POST'])
 def get_gpt():
-    data = request.form.get('data')
+    data = json.dumps(request.json)
 
-    response = OpenAI(prompt=data).run()
+    if data:
+        response = OpenAI(prompt=data).run()
 
-    return jsonify(response)
+        return jsonify({
+            'gpt': response
+        })
+    return jsonify({
+        'error': 'Error'
+    })
 
 if __name__ == '__main__':
     run_thread(run)
