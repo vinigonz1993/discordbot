@@ -71,9 +71,9 @@ def get_route():
 def get_gpt():
     data = request.form.get('data')
 
-    request = OpenAI(data).run()
+    response = OpenAI(data).run()
 
-    return jsonify(request)
+    return jsonify(response)
 
 if __name__ == '__main__':
     run_thread(run)
